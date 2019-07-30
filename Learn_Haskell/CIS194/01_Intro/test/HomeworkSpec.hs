@@ -42,3 +42,17 @@ spec = do
   describe "validate" $ do
     it "should be valid" $ validate 4012888888881881 `shouldBe` True
     it "should be invalid" $ validate 4012888888881882 `shouldBe` False
+  describe "hanoi" $ do
+    it "should build right path" $
+      hanoi 3 "a" "b" "c" `shouldBe`
+      [ ("a", "b")
+      , ("a", "c")
+      , ("b", "c")
+      , ("a", "b")
+      , ("c", "a")
+      , ("c", "b")
+      , ("a", "b")
+      ]
+    it "should build right path with 4 pegs" $
+      hanoi2 3 "a" "b" "c" "d" `shouldBe`
+      [("a", "c"), ("a", "d"), ("a", "b"), ("d", "b"), ("c", "b")]

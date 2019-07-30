@@ -35,3 +35,23 @@ validate :: Integer -> Bool
 validate n = helper n `mod` 10 == 0
   where
     helper = sumDigits . doubleEveryOther . toDigits
+
+type Peg = String
+
+type Move = (Peg, Peg)
+
+-- | Solves Tower of Hanoi problem with three pegs
+hanoi :: Integer -> Peg -> Peg -> Peg -> [Move]
+hanoi 1 source dest _ = [(source, dest)]
+hanoi n source dest aux =
+  hanoi (n - 1) source aux dest ++
+  [(source, dest)] ++ hanoi (n - 1) aux dest source
+
+-- | Solves Tower of Hanoi problem with four pegs
+hanoi2 :: Integer -> Peg -> Peg -> Peg -> Peg -> [Move]
+hanoi2 0 _ _ _ _ = []
+hanoi2 1 source dest _ _ = [(source, dest)]
+hanoi2 n source dest aux1 aux2 =
+  hanoi2 (n - 2) source aux1 aux2 dest ++
+  [(source, aux2)] ++
+  [(source, dest)] ++ [(aux2, dest)] ++ hanoi2 (n - 2) aux1 dest source aux2
