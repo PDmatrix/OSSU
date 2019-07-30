@@ -23,8 +23,15 @@ doubleEveryOther (x:y:zs)
   | otherwise = x : y * 2 : doubleEveryOther zs
 
 -- | Calculating the sum of all digits in list
--- sumDigits [] = 0
+-- sumDigits [] = 0s
 -- sumDigits (x:xs) = x `mod` 10 + x `div` 10 + sumDigits xs
 sumDigits :: [Integer] -> Integer
-sumDigits = foldr helper 0 where
-  helper x = (+) ((x `mod` 10) + (x `div` 10))
+sumDigits = foldr helper 0
+  where
+    helper x = (+) ((x `mod` 10) + (x `div` 10))
+
+-- | Checking whether an integer could be valid credit card number
+validate :: Integer -> Bool
+validate n = helper n `mod` 10 == 0
+  where
+    helper = sumDigits . doubleEveryOther . toDigits
