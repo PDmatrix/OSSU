@@ -35,3 +35,8 @@ spec = do
       doubleEveryOther [1] `shouldBe` [1]
     it "should do nothing with an empty array" $
       doubleEveryOther [] `shouldBe` []
+  describe "sumDigits" $ do
+    it "should calculate right result" $
+      sumDigits [16, 5, 2, 4] `shouldBe` 18
+    it "should calculate right result with one digit numbers" $
+      sumDigits [1, 2, 3, 4] `shouldBe` 10
